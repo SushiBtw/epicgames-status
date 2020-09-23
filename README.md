@@ -2,6 +2,9 @@
 
 Easy to use EpicGames Status Wrapper. Get the current Fortnite, BattleBreakers, EpicGames server status.
 
+## Package Download
+[https://www.npmjs.com/package/epicgames-status](https://www.npmjs.com/package/epicgames-status)
+
 # Installation
 ```sh
 npm install --save epicgames-status
