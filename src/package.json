@@ -1,0 +1,24 @@
+{
+    "name": "epicgames-status",
+    "version": "1.0.3",
+    "description": "Easy to use EpicGames Status Wrapper. Get the current Fortnite, BattleBreakers, EpicGames server status.",
+    "main": "main.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/SushiBtw/epicgames-status"
+    },
+    "author": "SushiBtw",
+    "keywords": [ "epic games", "fortnite", "epicgames api", "fortnite status", "epicgames status" ],
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/SushiBtw/epicgames-status/issues"
+    },
+    "dependencies": {
+        "html-entities": "^1.3.1",
+        "miniget": "^2.0.1"
+    },
+    "homepage": "https://github.com/SushiBtw/epicgames-status"
+}
