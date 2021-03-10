@@ -11,6 +11,8 @@ module.exports = async () => {
     const BattleBreakers = getBattleBreakersStatus(content);
     const EpicOnlineServices = getEpicOnlineServicesStatus(content);
     const RocketLeague = getRocketLeagueStatus(content);
+    const Houseparty = getHousepartyStatus(content);
+    const SupportACreator = getSupportACreatorStatus(content);
 
     let PageStatus = UTIL.between(content, '<div class="container">', '\n</div>');
     PageStatus = UTIL.between(PageStatus, '<div', '</div>');
@@ -31,6 +33,8 @@ module.exports = async () => {
         EpicOnlineServices: EpicOnlineServices,
         RocketLeague: RocketLeague,
         BattleBreakers: BattleBreakers,
+        Houseparty: Houseparty,
+        SupportACreator: SupportACreator,
     }
 }
 
@@ -54,6 +58,9 @@ const getFortniteStatus = (content) => {
     let Voice = UTIL.between(content, 'data-component-id="12xt5b2ysxtk"', '>');
     Voice = UTIL.between(Voice, 'data-component-status="', '"').capitalize();
 
+    let HousepartyVoice = UTIL.between(content, 'data-component-id="c1x9y701pts0"', '>');
+    HousepartyVoice = UTIL.between(HousepartyVoice, 'data-component-status="', '"').capitalize();
+
     let Matchmaking = UTIL.between(content, 'data-component-id="n62jd9mnxgnf"', '>');
     Matchmaking = UTIL.between(Matchmaking, 'data-component-status="', '"').capitalize();
 
@@ -63,6 +70,9 @@ const getFortniteStatus = (content) => {
     let ItemShop = UTIL.between(content, 'data-component-id="689s95gldrs3"', '>');
     ItemShop = UTIL.between(ItemShop, 'data-component-status="', '"').capitalize();
 
+    let FortniteCrew = UTIL.between(content, 'data-component-id="vyf8y8054472"', '>');
+    FortniteCrew = UTIL.between(FortniteCrew, 'data-component-status="', '"').capitalize();
+
 
     return {
         Status,
@@ -71,9 +81,47 @@ const getFortniteStatus = (content) => {
         Login,
         Parties,
         Voice,
+        HousepartyVoice,
         Matchmaking,
         Stats,
-        ItemShop
+        ItemShop,
+        FortniteCrew
+    }
+}
+
+const getHousepartyStatus = (content) => {
+
+    let Status = UTIL.between(content, `data-component-id="bkzg16ctlh87"`, '>');
+    Status = UTIL.between(Status, 'data-component-status="', '"').capitalize();
+
+    return {
+        Status
+    }
+}
+
+const getSupportACreatorStatus = (content) => {
+
+    let Status = UTIL.between(content, `data-component-id="29w1zbmgr3rm"`, '>');
+    Status = UTIL.between(Status, 'data-component-status="', '"').capitalize();
+
+    let Website = UTIL.between(content, 'data-component-id="ct10dfh6rvqb"', '>');
+    Website = UTIL.between(Website, 'data-component-status="', '"').capitalize();
+
+    let NewApplications = UTIL.between(content, 'data-component-id="xzr17hc7bqkq"', '>');
+    NewApplications = UTIL.between(NewApplications, 'data-component-status="', '"').capitalize();
+
+    let AccountMigration = UTIL.between(content, 'data-component-id="j98dynb06xk7"', '>');
+    AccountMigration = UTIL.between(AccountMigration, 'data-component-status="', '"').capitalize();
+
+    let Payment = UTIL.between(content, 'data-component-id="447vpvf9dn17"', '>');
+    Payment = UTIL.between(Payment, 'data-component-status="', '"').capitalize();
+
+    return {
+        Status,
+        Website,
+        NewApplications,
+        AccountMigration,
+        Payment,
     }
 }
 
@@ -178,6 +226,12 @@ const getEpicOnlineServicesStatus = (content) => {
     let Lobbies = UTIL.between(content, 'data-component-id="m4xvxnmqdhp5"', '>');
     Lobbies = UTIL.between(Lobbies, 'data-component-status="', '"').capitalize();
 
+    let SocialOverlay = UTIL.between(content, 'data-component-id="jvrp3frhd8ck"', '>');
+    SocialOverlay = UTIL.between(SocialOverlay, 'data-component-status="', '"').capitalize();
+
+    let Purchasing = UTIL.between(content, 'data-component-id="w5xcld6zyk02"', '>');
+    Purchasing = UTIL.between(Purchasing, 'data-component-status="', '"').capitalize();
+
 
     return {
         Status,
@@ -189,6 +243,8 @@ const getEpicOnlineServicesStatus = (content) => {
         Stats,
         Achievements,
         Leaderboards,
-        Lobbies
+        Lobbies,
+        SocialOverlay,
+        Purchasing
     }
 }
