@@ -33,7 +33,7 @@ module.exports = async () => {
         EpicOnlineServices: EpicOnlineServices,
         RocketLeague: RocketLeague,
         BattleBreakers: BattleBreakers,
-        Houseparty: Houseparty,
+        Housearty: Houseparty,
         SupportACreator: SupportACreator,
     }
 }

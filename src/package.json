@@ -1,6 +1,6 @@
 {
     "name": "epicgames-status",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "description": "Easy to use EpicGames Status Wrapper. Get the current Fortnite, BattleBreakers, EpicGames server status.",
     "main": "main.js",
     "scripts": {
