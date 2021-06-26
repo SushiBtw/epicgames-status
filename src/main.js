@@ -8,11 +8,14 @@ const BASE_URL = 'https://status.epicgames.com/';
 module.exports = async () => {
     const content = await MINIGET(BASE_URL).text();
     const FortniteStatus = getFortniteStatus(content);
+    const EpicGamesStoreServices = getEpicGamesStoreStatus();
     const BattleBreakers = getBattleBreakersStatus(content);
     const EpicOnlineServices = getEpicOnlineServicesStatus(content);
     const RocketLeague = getRocketLeagueStatus(content);
     const Houseparty = getHousepartyStatus(content);
     const SupportACreator = getSupportACreatorStatus(content);
+    const TwinmotionCloud = getTwinMotionCloudStatus(content);
+    const MetaHumanCreator = getMetaHumanCreatorStatus(content);
 
     let PageStatus = UTIL.between(content, '<div class="container">', '\n</div>');
     PageStatus = UTIL.between(PageStatus, '<div', '</div>');
@@ -23,9 +26,6 @@ module.exports = async () => {
         PageStatus = UTIL.between(PageStatus, '>', '<');
     }
 
-    let EpicGamesStore = UTIL.between(content, 'data-component-id="4n43gb11j5v5"', '/div>');
-    let EpicGamesStoreServices = UTIL.between(EpicGamesStore, `<span class="tool icon-indicator fa fa-check" title="`, '"');
-
     return {
         EpicGames: PageStatus,
         EpicGamesStore: EpicGamesStoreServices,
@@ -35,6 +35,8 @@ module.exports = async () => {
         BattleBreakers: BattleBreakers,
         Houseparty: Houseparty,
         SupportACreator: SupportACreator,
+        TwinmotionCloud: TwinmotionCloud,
+        MetaHumanCreator: MetaHumanCreator
     }
 }
 
@@ -99,6 +101,42 @@ const getHousepartyStatus = (content) => {
     }
 }
 
+const getMetaHumanCreatorStatus = (content) => {
+
+    let Status = UTIL.between(content, `data-component-id="kf62r9ghzqth"`, '>');
+    Status = UTIL.between(Status, 'data-component-status="', '"').capitalize();
+
+    return {
+        Status
+    }
+}
+
+const getEpicGamesStoreStatus = (content) => {
+
+    let Status = UTIL.between(content, `data-component-id="khtrdkxhxjd9"`, '>');
+    Status = UTIL.between(Status, 'data-component-status="', '"').capitalize();
+
+    let Login = UTIL.between(content, `data-component-id="4n43gb11j5v5"`, '>');
+    Login = UTIL.between(Login, 'data-component-status="', '"').capitalize();
+
+    let DownloadInstallation = UTIL.between(content, `data-component-id="y849t4lsbjfn"`, '>');
+    DownloadInstallation = UTIL.between(DownloadInstallation, 'data-component-status="', '"').capitalize();
+
+    let PurchasingRefunding = UTIL.between(content, `data-component-id="tp6hfkgmthv2"`, '>');
+    PurchasingRefunding = UTIL.between(PurchasingRefunding, 'data-component-status="', '"').capitalize();
+
+    let StoreBrowsing = UTIL.between(content, `data-component-id="sz75wgf2p5hx"`, '>');
+    StoreBrowsing = UTIL.between(StoreBrowsing, 'data-component-status="', '"').capitalize();
+
+    return {
+        Status,
+        Login,
+        DownloadInstallation,
+        PurchasingRefunding,
+        StoreBrowsing
+    }
+}
+
 const getSupportACreatorStatus = (content) => {
 
     let Status = UTIL.between(content, `data-component-id="29w1zbmgr3rm"`, '>');
@@ -122,6 +160,24 @@ const getSupportACreatorStatus = (content) => {
         NewApplications,
         AccountMigration,
         Payment,
+    }
+}
+
+const getTwinMotionCloudStatus = (content) => {
+
+    let Status = UTIL.between(content, `data-component-id="g0zwxyr25ttf"`, '>');
+    Status = UTIL.between(Status, 'data-component-status="', '"').capitalize();
+
+    let Drive = UTIL.between(content, 'data-component-id="ydnp86ymzflb"', '>');
+    Drive = UTIL.between(Drive, 'data-component-status="', '"').capitalize();
+
+    let PixelStreaming = UTIL.between(content, 'data-component-id="h2ss7yf252k8"', '>');
+    PixelStreaming = UTIL.between(PixelStreaming, 'data-component-status="', '"').capitalize();
+
+    return {
+        Status,
+        Drive,
+        PixelStreaming
     }
 }
 
@@ -214,6 +270,9 @@ const getEpicOnlineServicesStatus = (content) => {
     let PlayerDataStorage = UTIL.between(content, 'data-component-id="5c125kx81yw9"', '>');
     PlayerDataStorage = UTIL.between(PlayerDataStorage, 'data-component-status="', '"').capitalize();
 
+    let TitleStorage = UTIL.between(content, 'data-component-id="zwmhdvh1mgpr"', '>');
+    TitleStorage = UTIL.between(TitleStorage, 'data-component-status="', '"').capitalize();
+
     let Stats = UTIL.between(content, 'data-component-id="z9x81lwqrlzy"', '>');
     Stats = UTIL.between(Stats, 'data-component-status="', '"').capitalize();
 
@@ -232,6 +291,9 @@ const getEpicOnlineServicesStatus = (content) => {
     let Purchasing = UTIL.between(content, 'data-component-id="w5xcld6zyk02"', '>');
     Purchasing = UTIL.between(Purchasing, 'data-component-status="', '"').capitalize();
 
+    let Voice = UTIL.between(content, 'data-component-id="xh420w3306lx"', '>');
+    Voice = UTIL.between(Voice, 'data-component-status="', '"').capitalize();
+
 
     return {
         Status,
@@ -240,11 +302,13 @@ const getEpicOnlineServicesStatus = (content) => {
         P2P,
         Matchmaking,
         PlayerDataStorage,
+        TitleStorage,
         Stats,
         Achievements,
         Leaderboards,
         Lobbies,
         SocialOverlay,
-        Purchasing
+        Purchasing,
+        Voice
     }
 }
